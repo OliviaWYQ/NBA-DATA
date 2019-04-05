@@ -1,0 +1,128 @@
+*{
+    padding: 0;
+	margin:0;
+}
+.header{
+	width: 100%;
+	height: 100px;
+	background-color: #ffffff;
+}
+.header .logo img{
+	width:200px;
+	height: 100px;
+	margin-left: 120px;
+	float: left;
+}
+.header .menu{
+	height: 100px;
+	float: right;
+}
+.header .menu ul{
+	margin-right: 120px;
+}
+.header .menu li{
+	float: right;
+	list-style-type: none;
+	width: 100px;
+	font-family: "Georgia";
+	font-size: 15px;
+	line-height: 100px;
+	font-weight: bold;
+	text-align: center;
+}
+
+a:link {
+	color:#0d0d0d;
+	text-decoration:none;
+	}      /* 未访问链接*/
+a:visited {
+	color:#0d0d0d;
+	text-decoration:none;
+	}  /* 已访问链接 */
+a:hover {
+	color:#006bb7;
+	text-decoration:none;
+	}  /* 鼠标移动到链接上 */
+a:active {color:#006bb7;
+	text-decoration:none;
+	}  /* 鼠标点击时 */
+
+.main .pic img{
+	width: 100%;
+	height: 600px;
+	position: relative;
+}
+
+.main .content{
+	background-color: transparent;
+	z-index: 1;
+	position: absolute;
+	top: 300px;
+	width: 100%;
+	height: 200px;
+	color: #ffffff;
+}
+
+.main h1{
+	font-family: Helvetica, sans-serif;
+	font-weight: bold;
+	padding-bottom: 70px;
+	text-align: center;
+	color: #ffffff;
+}
+
+.main .bar{
+	padding-top:15px;
+	padding-bottom:15px;
+	font-size: 20px;
+	font-family: Helvetica, sans-serif;
+	font-weight: bold;
+	text-align: center;
+	color: #ffffff;
+
+}
+
+.main .smallbar{
+	padding-top:5px;
+	font-size: 16px;
+	font-family: Helvetica, sans-serif;
+	font-weight: bold;
+	text-align: center;
+	color: #000000;
+}
+
+
+.main .submit{
+	padding-top:50px;
+	font-size: 20px;
+	font-family: Helvetica, sans-serif;
+	font-weight: bold;
+	text-align: center;
+	color: #ffffff;
+}
+
+.button {
+    background-color: #006bb7;
+    border: none;
+    color: white;
+    padding: 9px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.footer{
+	width: 100%;
+	height: 100px;
+	background-color: #0d0d0d;
+	color: #ffffff;
+	text-align: center;
+	line-height: 100px;
+	font-family: Arial;
+	font-size: 15px;
+}

@@ -1,0 +1,27 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Show Player Data</title>
+</head>
+   <body>
+      
+      <table border = 1>
+         <thead>
+            <td>Name</td>
+            <td>Team</td>
+            <td>SSN</td>
+         </thead>
+
+         {% for row in rows %}
+            <tr>
+               <td>{{row["name"]}}</td>
+               <td>{{row["team"]}}</td>
+               <td>{{row["ssn"]}}</td>
+            </tr>
+         {% endfor %}
+      </table>
+
+      <h2><a href = "/">return</a></h2>
+
+   </body>
+</html>

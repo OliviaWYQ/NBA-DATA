@@ -1,0 +1,22 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Add player info</title>
+</head>
+   <body>
+
+    <form action = "{{ url_for('addrec') }}" method = "POST">
+         <h3>Add Players</h3>
+         Name<br>
+         <input type = "text" name = "addname" /></br>
+
+         Team<br>
+         <input type = "text" name = "addteam" /><br>
+
+         SSN<br>
+         <input type = "text" name = "addssn" /><br>
+         <input type = "submit" value = "submit" /><br>
+      </form>
+
+   </body>
+</html>
