@@ -2,6 +2,9 @@ from flask import Flask, redirect, url_for, request, render_template
 import sqlite3 as sql
 import sqlite3
 
+from sqlalchemy import *
+DATABASEURI = "postgresql://yw3225:dbdb@34.73.21.127/proj1part2"
+
 app = Flask(__name__)
 
 # @app.route('/admin')
@@ -16,6 +19,7 @@ app = Flask(__name__)
 # @app.route('/hello/<name>')
 # def show_player(name):
 #     return render_template('hello.html', pname = name)
+
 
 
 @app.route('/result',methods = ['POST', 'GET'])
@@ -98,6 +102,26 @@ def init():
     print ("Table created successfully")
     conn.close()
     return 'OK'
+
+
+@app.route('/initpsql')
+def initpsql():
+    engine = create_engine(DATABASEURI)
+    conn = engine.connect()
+
+    cursor_player = conn.execute("select * from players")
+    rows_player = cursor_player.fetchall()
+
+    cursor_team = conn.execute("select * from teams")
+    rows_team = cursor_team.fetchall()
+
+    cursor_boss = conn.execute("select * from boss")
+    rows_boss = cursor_boss.fetchall()
+
+    return render_template("list.html", 
+      rows_player=rows_player, 
+      rows_team=rows_team,
+      rows_boss=rows_boss)
 
 
 if __name__ == '__main__':

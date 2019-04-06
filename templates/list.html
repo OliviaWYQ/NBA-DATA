@@ -1,0 +1,66 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Show PostgreSQL Data</title>
+	<link rel= "stylesheet" href= "{{ url_for('static',filename='css/index.css')}}">
+</head>
+   <body>
+      
+   	<div class = "center">
+   		<h2>PostgreSQL Players Data</h2>
+      <table>
+         <thead>
+         	<tr>
+	            <th>Team Name</th>
+	            <th>Player Name</th>
+	            <th>Player SSN</th>
+              <th>Height (in)</th>
+              <th>Weight (lb)</th>
+              <th>position</th>
+              <th>Salary</th>
+              <th>Points Per Game</th>
+        	</tr>
+         </thead>
+
+         {% for row in rows_player %}
+            <tr>
+               <td>{{row["team"]}}</td>
+               <td>{{row["pid"]}}</td>
+               <td>{{row["ssn"]}}</td>
+               <td>{{row["height_in"]}}</td>
+               <td>{{row["weight_lb"]}}</td>
+               <td>{{row["position"]}}</td>
+               <td>{{row["salary2018_2019"]}}</td>
+               <td>{{row["pointspergame"]}}</td>
+            </tr>
+         {% endfor %}
+      </table>
+      <br>
+      <h2>PostgreSQL Teams Data</h2>
+      <table>
+         <thead>
+          <tr>
+              <th>Team ID</th>
+              <th>Team Name</th>
+              <th>Location</th>
+              <th>All Star Players</th>
+              <th>Number of Champion</th>
+          </tr>
+         </thead>
+
+         {% for row in rows_team %}
+            <tr>
+               <td>{{row["tid"]}}</td>
+               <td>{{row["name"]}}</td>
+               <td>{{row["location"]}}</td>
+               <td>{{row["allstarplayer"]}}</td>
+               <td>{{row["numofchampion"]}}</td>
+            </tr>
+         {% endfor %}
+      </table>
+      <a class = "button two" href = "/">return</a>
+  	</div>
+      
+
+   </body>
+</html>
