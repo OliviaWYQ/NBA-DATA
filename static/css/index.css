@@ -31,21 +31,75 @@
 	text-align: center;
 }
 
-a:link {
+
+a.one:link {
 	color:#0d0d0d;
 	text-decoration:none;
-	}      /* 未访问链接*/
-a:visited {
+	}    
+a.one:visited {
 	color:#0d0d0d;
 	text-decoration:none;
-	}  /* 已访问链接 */
-a:hover {
+	} 
+a.one:hover {
 	color:#006bb7;
 	text-decoration:none;
-	}  /* 鼠标移动到链接上 */
-a:active {color:#006bb7;
+	} 
+a.one:active {
+	color:#006bb7;
 	text-decoration:none;
-	}  /* 鼠标点击时 */
+	} 
+
+
+a.two:link {
+	color:#ffffff;
+	text-decoration:none;
+	}   
+a.two:visited {
+	color:#ffffff;
+	text-decoration:none;
+	} 
+a.two:hover {
+	color:#ffffff;
+	text-decoration:none;
+	} 
+a.two:active {
+	color:#ffffff;
+	text-decoration:none;
+	}
+
+.center{
+      text-align:center;
+}
+
+
+table {
+	margin: auto;
+    border-collapse: collapse;
+    font-family: Helvetica, Arial, sans-serif;
+}
+ 
+caption {
+    font-size: larger;
+    margin: 1em auto;
+}
+ 
+th,td {
+    padding: .65em;
+}
+ 
+th {
+   background: #555;
+   border: 1px solid #777;
+   color: #fff;
+}
+ 
+td {
+     border: 1px solid #777;
+}
+
+tbody tr:nth-child(odd) {
+     background: #ccc;
+}
 
 .main .pic img{
 	width: 100%;
@@ -117,6 +171,7 @@ a:active {color:#006bb7;
 }
 
 .footer{
+	padding-top:50px;
 	width: 100%;
 	height: 100px;
 	background-color: #0d0d0d;

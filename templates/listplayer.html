@@ -1,15 +1,20 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Show Player Data</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Show Player Data</title>
+	<link rel= "stylesheet" href= "{{ url_for('static',filename='css/index.css')}}">
 </head>
    <body>
       
-      <table border = 1>
+   	<div class = "center">
+   		<h2>Players Data</h2>
+      <table>
          <thead>
-            <td>Name</td>
-            <td>Team</td>
-            <td>SSN</td>
+         	<tr>
+	            <th>Name</th>
+	            <th>Team</th>
+	            <th>SSN</th>
+        	</tr>
          </thead>
 
          {% for row in rows %}
@@ -20,8 +25,9 @@
             </tr>
          {% endfor %}
       </table>
-
-      <h2><a href = "/">return</a></h2>
+      <a class = "button two" href = "/">return</a>
+  	</div>
+      
 
    </body>
 </html>
