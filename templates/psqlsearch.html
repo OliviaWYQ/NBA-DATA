@@ -1,14 +1,14 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Show Player Data</title>
+	<title>Search Data</title>
 	<link rel= "stylesheet" href= "{{ url_for('static',filename='css/index.css')}}">
 </head>
    <body>
       
    	<div class = "center">
       <br>
-      <h2>PostgreSQL Players Data</h2>
+      <h2>PostgreSQL Search For Player</h2>
       <table>
          <thead>
           <tr>
@@ -25,7 +25,7 @@
          </thead>
 
          {% for row in rows_player %}
-         {{row}}
+         <!-- {{row}} -->
             <tr>
                <td>{{row["pid"]}}</td>
                <td>{{row["team"]}}</td>

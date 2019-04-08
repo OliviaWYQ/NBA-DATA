@@ -28,16 +28,26 @@ def search_player():
         pname = request.form['pname']
         tname = request.form['tname']
         print(tname, pname)
-        con = sql.connect("database.db")
-        con.row_factory = sql.Row
-        cur = con.cursor()
-
-        cur.execute("SELECT DISTINCT * from players WHERE (name, team) = (?,?)",[pname, tname])
         
+        # con = sql.connect("database.db")
+        # con.row_factory = sql.Row
+        # cur = con.cursor()
+
+        engine = create_engine(DATABASEURI, convert_unicode=True)
+        metadata = MetaData(bind=engine)
+        conn = engine.connect()
+        # conn.execute("CREATE VIEW viewplayer AS SELECT pid,players.team,players.ssn,birthday,height_in,weight_lb,position,salary2018_2019,pointspergame FROM players inner join employees on players.ssn = employees.ssn")
+        # rows = cursor_player.fetchall()
+        players = Table('viewplayer', metadata, autoload=True)
+        rows_player = players.select(players.c.pid == pname).execute()
+
+        # metadata = MetaData(bind=engine)
+        # players = Table('players', metadata, autoload=True)
+        # rows = players.select(players.c.pid == pname).execute()
+
         # cur.execute("SELECT * from players")
         print ("Table select successfully")
-        rows = cur.fetchall()
-    return render_template("listplayer.html",rows = rows)
+    return render_template("psqlsearch.html",rows_player = rows_player)
 
 
 # @app.route('/result',methods = ['POST', 'GET'])
@@ -82,15 +92,33 @@ def addrec():
 
 @app.route('/listplayer')
 def listplayer():
-    con = sql.connect("database.db")
-    con.row_factory = sql.Row
+    # con = sql.connect("database.db")
+    # con.row_factory = sql.Row
+    # cur = con.cursor()
+    # cur.execute("select * from players")
+    # rows = cur.fetchall()
 
-    cur = con.cursor()
-    cur.execute("select * from players")
-    print ("Table select successfully")
+    engine = create_engine(DATABASEURI)
+    conn = engine.connect()
+    cursor_player = conn.execute("select * from players inner join employees on players.ssn = employees.ssn")
+    rows_player = cursor_player.fetchall()
+    return render_template("listplayer.html",rows = rows_player)
 
-    rows = cur.fetchall()
-    return render_template("listplayer.html",rows = rows)
+@app.route('/listteam')
+def listteam():
+    engine = create_engine(DATABASEURI)
+    conn = engine.connect()
+    cursor_team = conn.execute("select * from teams")
+    rows_team = cursor_team.fetchall()
+    return render_template("listteam.html",rows = rows_team)
+
+@app.route('/listgame')
+def listgame():
+    engine = create_engine(DATABASEURI)
+    conn = engine.connect()
+    cursor_game = conn.execute("select * from games")
+    rows_game = cursor_game.fetchall()
+    return render_template("listgame.html",rows = rows_game)
 
 
 @app.route('/init')
@@ -109,8 +137,14 @@ def initpsql():
     engine = create_engine(DATABASEURI)
     conn = engine.connect()
 
-    cursor_player = conn.execute("select * from players")
+    cursor_player = conn.execute("select * from players inner join employees on players.ssn = employees.ssn")
     rows_player = cursor_player.fetchall()
+
+    cursor_coach = conn.execute("select * from coaches inner join employees on coaches.ssn = employees.ssn")
+    rows_coach = cursor_coach.fetchall()
+
+    cursor_manager = conn.execute("select * from managers inner join employees on managers.ssn = employees.ssn")
+    rows_manager = cursor_manager.fetchall()
 
     cursor_team = conn.execute("select * from teams")
     rows_team = cursor_team.fetchall()
@@ -118,10 +152,16 @@ def initpsql():
     cursor_boss = conn.execute("select * from boss")
     rows_boss = cursor_boss.fetchall()
 
+    cursor_game = conn.execute("select * from games")
+    rows_game = cursor_game.fetchall()
+
     return render_template("list.html", 
       rows_player=rows_player, 
+      rows_coach=rows_coach,
+      rows_manager=rows_manager,
       rows_team=rows_team,
-      rows_boss=rows_boss)
+      rows_boss=rows_boss,
+      rows_game=rows_game)
 
 
 if __name__ == '__main__':
