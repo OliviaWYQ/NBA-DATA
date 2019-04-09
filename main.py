@@ -168,9 +168,11 @@ def search_player():
           rows_team = cursor_team.fetchall()
           if rows_team != []:
             print ("Select Team successfully")
+
             cursor_game = conn.execute('''SELECT DISTINCT games.gid, games.date, games.time, host, scoreh, visitor, scorev from teams inner join games on name = games.host OR name = games.visitor WHERE name = '{}';'''.format(tname))
             rows_game = cursor_game.fetchall()
             print ("Select Game successfully")
+
             cursor_manager = conn.execute('''SELECT mname, ssn, college, since FROM teams inner join
                                     (SELECT mname, managers.ssn, college, tid, since FROM managers inner join manage 
                                     ON managers.ssn = manage.ssn) new
@@ -244,26 +246,37 @@ def new_player():
 
 @app.route('/addrec',methods = ['POST', 'GET'])
 def addrec():
+    # msg = ''
     if request.method == 'POST':
-       try:
-          nm = request.form['addname']
-          tm = request.form['addteam']
 
-          engine = create_engine(DATABASEURI)
-          # with sql.connect("database.db") as con:
-          with engine.connect() as con:
-             # cur = con.cursor()
+        nm = request.form['addname']
+        tm = request.form['addteam']
 
-             cun.execute("INSERT INTO players (name, team) VALUES (?,?)",(nm,tm) )
-             con.commit()
-             msg = "Request successfully added, waiting for administrator to approve."
-       except:
-          con.rollback()
-          msg = "error in insert operation"
-
-       finally:
-          return render_template("result.html", msg = msg)
-          con.close()
+        if not nm:
+            error = 'player name is required.'
+        elif not tm:
+            error = 'team name is required.'
+        try:
+            engine = create_engine(DATABASEURI)
+            # with sql.connect("database.db") as con:
+            with engine.connect() as con:
+            # cur = con.cursor()
+            # cur.execute("INSERT INTO players (name, team) VALUES (?,?)",(nm,tm) )
+                con.execute('''INSERT INTO myinsert (name, team) VALUES ('{0}', '{1}')'''.format(nm,tm))
+                # con.commit()
+                msg = "Request successfully added, waiting for administrator to approve."
+                print(msg)
+                return render_template("result.html", msg = msg)
+                con.close()
+        # except:
+        #   con.rollback()
+        #   msg = "error in insert operation"
+        #   print(msg)
+        # finally:
+        except Exception as e:
+            error = e
+    return render_template("result.html", msg = error)
+          
 
 
 @app.route('/profile')
@@ -279,7 +292,7 @@ def profile():
 
     engine = create_engine(DATABASEURI)
     con = engine.connect()
-    cusor_insert = con.execute("select * from insert")
+    cusor_insert = con.execute("select * from myinsert")
     rows_insert = cusor_insert.fetchall()
 
     cusor_user = con.execute("select * from usernba")
@@ -329,7 +342,7 @@ def init():
 
     print ("Opened database successfully")
 
-    conn.execute('CREATE TABLE insert (name TEXT, team TEXT)')
+    conn.execute('CREATE TABLE myinsert (name TEXT, team TEXT)')
     print ("Insert Player Table created successfully")
 
     # conn.execute('CREATE TABLE user (id INT, username CHAR(15), email CHAR(50), password CHAR(80), PRIMARY KEY (id))')
