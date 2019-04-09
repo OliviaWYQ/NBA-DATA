@@ -4,8 +4,8 @@ clone the repository and run
 python main.py
 ```
 Go to http://0.0.0.0:8111/
-
 User needs to signup/login first, and then search the players or teams data
+
 
 The PostgreSQL account where your database on our server resides: 
 yw3225
@@ -18,7 +18,7 @@ We implemented the functions of signup, login, inseart, search. To be more preci
 The part we didn’t implement is subscribing and voting. As these two functions are not mainly based on execute SQL queries. Also, subscribing and voting have no interaction with our other entities in the database. Thus, we decide not implement the part. Instead, we spent our time on more interesting things like how to make our database more functional and attack protectable. 
 
 Briefly describe two of the web pages that require (what you consider) the most interesting database operations in terms of what the pages are used for, how the page is related to the database operations (e.g., inputs on the page are used in such and such way to produce database operations that do such and such), and why you think they are interesting.
-The signup page require some interesting database operations. As we use select to check if the username or email had already exist in the database. If duplicate, we have an informing message indicating that the username/email was used by other people; if not, we insert that information to our user table and jump to the login page. Moreover, both signup and login page have some validator. Your username must  be between 3 and 15 characters long, or our page would give an error message.
 
- The search page is also interesting. Once you type the existing player in our database, you can go to the webpage that shows all the information of that player. In that player page, you can see a link that can lead you to the player’s team.
+The signup page require some interesting database operations. As we use select to check if the username or email had already exist in the database. If duplicate, we have an informing message indicating that the username/email was used by other people; if not, we insert that information to our user table and jump to the login page. Moreover, both signup and login page have some validator. Your username must  be between 3 and 15 characters long, or our page would give an error message.
+The search page is also interesting. Once you type the existing player in our database, you can go to the webpage that shows all the information of that player. In that player page, you can see a link that can lead you to the player’s team.
 
