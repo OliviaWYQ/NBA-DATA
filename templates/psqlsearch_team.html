@@ -10,40 +10,8 @@
       
    	<div class = "center">
       <br>
-      <h2>PostgreSQL Search For Player</h2>
+      <h2>PostgreSQL Search For Team</h2>
       <br>
-       {% for row in rows_player %}
-       <!-- {{row}} -->
-          <dl>
-             <dt>Player Name:&nbsp&nbsp</dt>
-             <dd>{{row["pid"]}}</dd>
-
-             <dt>Team Name:&nbsp&nbsp</dt>
-             <dd><a href="/search_team">{{row["team"]}}</a></dd>
-
-             <dt>Player SSN:&nbsp&nbsp</dt>
-             <dd>{{row["ssn"]}}</dd>
-
-             <dt>Player Birthday:&nbsp&nbsp</dt>
-             <dd>{{row["birthday"]}}</dd>
-
-             <dt>Height (in):&nbsp&nbsp</dt>
-             <dd>{{row["height_in"]}}</dd>
-
-             <dt>Weight (lb):&nbsp&nbsp</dt>
-             <dd>{{row["weight_lb"]}}</dd>
-
-             <dt>position:&nbsp&nbsp</dt>
-             <dd>{{row["position"]}}</dd>
-
-             <dt>Salary:&nbsp&nbsp</dt>
-             <dd>{{row["salary2018_2019"]}}</dd>
-
-             <dt>Points Per Game:&nbsp&nbsp</dt>
-             <dd>{{row["pointspergame"]}}</dd>
-          </dl>
-       {% endfor %}
-       <br>
        
        {% for row in rows_team %}
         <dl>
@@ -63,7 +31,6 @@
        <br>
       <a class = "button two" href = "/">return</a>
   	</div>
-      
-
    </body>
+
 </html>

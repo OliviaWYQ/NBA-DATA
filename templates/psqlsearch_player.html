@@ -19,7 +19,7 @@
              <dd>{{row["pid"]}}</dd>
 
              <dt>Team Name:&nbsp&nbsp</dt>
-             <dd><a href="/search_team">{{row["team"]}}</a></dd>
+             <dd><a id="shift_team">{{row["team"]}}</a></dd>
 
              <dt>Player SSN:&nbsp&nbsp</dt>
              <dd>{{row["ssn"]}}</dd>
@@ -44,26 +44,16 @@
           </dl>
        {% endfor %}
        <br>
-       
-       {% for row in rows_team %}
-        <dl>
-          <dt>Team Name:&nbsp&nbsp</dt>
-          <dd>{{row["name"]}}</dd>
-
-          <dt>Location:&nbsp&nbsp</dt>
-          <dd>{{row["location"]}}</dd>
-
-          <dt>All Star Players:&nbsp&nbsp</dt>
-          <dd>{{row["allstarplayer"]}}</dd>
-
-          <dt>Number of Champion:&nbsp&nbsp</dt>
-          <dd>{{row["numofchampion"]}}</dd>
-        </dl>
-       {% endfor %}
-       <br>
       <a class = "button two" href = "/">return</a>
   	</div>
       
 
    </body>
+  <script type="text/javascript">
+    var someJavaScriptVar = '{{ rows_player[0]["team"] }}';
+    console.log(someJavaScriptVar);
+    var shift_team = someJavaScriptVar;
+    document.getElementById("shift_team").href='/search_team/'+shift_team;
+  </script>
 </html>
+

@@ -12,15 +12,17 @@
 	height: 100px;
 	margin-left: 120px;
 	float: left;
+	overflow: hidden;
 }
-.header .menu{
+
+.nav{
 	height: 100px;
 	float: right;
 }
-.header .menu ul{
+.nav ul{
 	margin-right: 120px;
 }
-.header .menu li{
+.nav li{
 	float: right;
 	list-style-type: none;
 	width: 100px;
@@ -30,7 +32,6 @@
 	font-weight: bold;
 	text-align: center;
 }
-
 
 a.one:link {
 	color:#0d0d0d;
@@ -69,6 +70,39 @@ a.two:active {
 
 .center{
       text-align:center;
+}
+
+/*dt {
+    font-weight: bold;
+}
+
+dl,
+dd {
+    font-size: 20px;
+}
+
+dd {
+    margin-bottom: 1em;
+}*/
+
+dl{
+	width:100%;
+	font-size: 20px;
+	margin-bottom: 1em;
+	margin: auto;
+}
+dt,dd{
+	float: left;
+	width:50%;
+	box-sizing:border-box;
+	overflow: hidden;
+}
+dt{
+	font-weight: bold;
+	text-align: right;
+}
+dd{
+  	text-align: left;
 }
 
 
@@ -180,4 +214,61 @@ tbody tr:nth-child(odd) {
 	line-height: 100px;
 	font-family: Arial;
 	font-size: 15px;
+}
+
+@media screen and (max-width: 800px) {
+	/*.nav {
+		position: absolute;
+		float: left
+		min-height: 40px;
+		z-index: 2;
+		overflow: hidden;
+	}	
+	.nav ul {
+		width: 180px;
+		padding: 5px 0;
+		position: absolute;
+		top: 0;
+		left: 0;
+		border: solid 1px #aaa;
+		background: #fff url({{ url_for('static', filename='image/icon-menu.png')}} no-repeat 10px 11px;
+		border-radius: 5px;
+		box-shadow: 0 1px 2px rgba(0,0,0,.3);
+	}*/
+
+	.header .logo img {
+		position: static;
+		width: 200px;
+		height: 100px;
+		margin: 0px auto;
+		float: none;
+		display: table;
+	}
+
+	.nav{
+		position: static;
+		height: 100px;
+		float: none;
+		margin: 0px auto;
+	}
+
+	.nav ul{
+		list-style-type: none;
+	}
+	.nav li{
+		font-family: "Georgia";
+		font-size: 15px;
+		line-height: 100px;
+		font-weight: bold;
+		text-align: center;
+	}
+	.nav li a{
+		display:block;
+	}
+
+
+
+
+
+
 }

@@ -2,7 +2,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" /> 
-	<title>Show Team Data</title>
+	<title>My profile</title>
   <link rel="shortcut icon" href="{{ url_for('static', filename='image/favicon.ico')}}" />
 	<link rel= "stylesheet" href= "{{ url_for('static',filename='css/index.css')}}">
 </head>
@@ -10,25 +10,21 @@
       
    	<div class = "center">
       <br>
-      <h2>PostgreSQL Teams Data</h2>
+      <h2>Players Data</h2>
+
+      <h3>User Info: {{user}}</h3>
       <table>
          <thead>
           <tr>
-              <th>Team ID</th>
+              <th>Player Name</th>
               <th>Team Name</th>
-              <th>Location</th>
-              <th>All Star Players</th>
-              <th>Number of Champion</th>
           </tr>
          </thead>
 
          {% for row in rows %}
             <tr>
-               <td>{{row["tid"]}}</td>
-               <td>{{row["name"]}}</td>
-               <td>{{row["location"]}}</td>
-               <td>{{row["allstarplayer"]}}</td>
-               <td>{{row["numofchampion"]}}</td>
+               <td>{{row["pid"]}}</td>
+               <td>{{row["team"]}}</td>
             </tr>
          {% endfor %}
       </table>

@@ -27,27 +27,55 @@ def search_player():
     if request.method == 'POST':
         pname = request.form['pname']
         tname = request.form['tname']
-        print(tname, pname)
+        print('pname', pname, 'tname', tname)
         
         # con = sql.connect("database.db")
         # con.row_factory = sql.Row
         # cur = con.cursor()
 
-        engine = create_engine(DATABASEURI, convert_unicode=True)
-        metadata = MetaData(bind=engine)
-        conn = engine.connect()
         # conn.execute("CREATE VIEW viewplayer AS SELECT pid,players.team,players.ssn,birthday,height_in,weight_lb,position,salary2018_2019,pointspergame FROM players inner join employees on players.ssn = employees.ssn")
-        # rows = cursor_player.fetchall()
-        players = Table('viewplayer', metadata, autoload=True)
-        rows_player = players.select(players.c.pid == pname).execute()
+
+        engine = create_engine(DATABASEURI, convert_unicode=True)
+        conn = engine.connect()
+
+        if pname != '*':
+          cursor_player = conn.execute('''SELECT * FROM viewplayer WHERE pid = '{}';'''.format(pname))
+          rows_player = cursor_player.fetchall()
+        
+        # cursor_team = conn.execute('''SELECT * FROM teams WHERE name = '{}';'''.format(tname))
+        # rows_team = cursor_team.fetchall()
+
+        # players = Table('viewplayer', metadata, autoload=True)
+        # rows_player = players.select(players.c.pid == pname).execute()
 
         # metadata = MetaData(bind=engine)
         # players = Table('players', metadata, autoload=True)
         # rows = players.select(players.c.pid == pname).execute()
 
         # cur.execute("SELECT * from players")
-        print ("Table select successfully")
-    return render_template("psqlsearch.html",rows_player = rows_player)
+          print ("Select Player successfully")
+          return render_template("psqlsearch_player.html",rows_player=rows_player)
+        elif tname != '*':
+          cursor_team = conn.execute('''SELECT * FROM teams WHERE name = '{}';'''.format(tname))
+          rows_team = cursor_team.fetchall()
+          print ("Select Team successfully")
+          return render_template("psqlsearch_team.html",rows_team=rows_team)
+        else:
+          return render_template("error.html", pvalue=pname, tvalue=tname)
+
+
+@app.route('/search_team/<tname>')
+def search_team(tname):
+    print(tname)
+    
+    engine = create_engine(DATABASEURI, convert_unicode=True)
+    conn = engine.connect()
+
+    cursor_team = conn.execute('''SELECT * FROM teams WHERE name = '{}';'''.format(tname))
+    rows_team = cursor_team.fetchall()
+
+    print ("Select Team successfully")
+    return render_template("psqlsearch_team.html",rows_team=rows_team)
 
 
 # @app.route('/result',methods = ['POST', 'GET'])
@@ -73,11 +101,10 @@ def addrec():
        try:
           nm = request.form['addname']
           tm = request.form['addteam']
-          pssn = request.form['addssn']
 
           with sql.connect("database.db") as con:
              cur = con.cursor()
-             cur.execute("INSERT INTO players (name, team, ssn) VALUES (?,?,?)",(nm,tm,pssn) )
+             cur.execute("INSERT INTO players (name, team) VALUES (?,?)",(nm,tm) )
 
              con.commit()
              msg = "Record successfully added"
@@ -88,6 +115,20 @@ def addrec():
        finally:
           return render_template("result.html",msg = msg)
           con.close()
+
+
+@app.route('/profile')
+def profile():
+    con = sql.connect("database.db")
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    cur.execute("select * from players")
+    rows = cur.fetchall()
+
+    cur_user = con.cursor()
+    cur_user.execute("select * from user")
+    user = cur_user.fetchall()
+    return render_template("profile.html",user = user, rows = rows)
 
 
 @app.route('/listplayer')
@@ -126,8 +167,12 @@ def init():
     conn = sqlite3.connect('database.db')
     print ("Opened database successfully")
 
-    conn.execute('CREATE TABLE players (name TEXT, team TEXT, ssn TEXT)')
-    print ("Table created successfully")
+    conn.execute('CREATE TABLE players (name TEXT, team TEXT)')
+    print ("Player Table created successfully")
+
+    conn.execute('CREATE TABLE user (id INT, username CHAR(15), email CHAR(50), password CHAR(80), PRIMARY KEY (id))')
+    print ("User Table created successfully")
+
     conn.close()
     return 'OK'
 
