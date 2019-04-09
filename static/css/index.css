@@ -252,7 +252,7 @@ tbody tr:nth-child(odd) {
 	font-size: 15px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
 	/*.nav {
 		position: absolute;
 		float: left
