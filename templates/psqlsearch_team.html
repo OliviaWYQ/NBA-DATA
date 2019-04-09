@@ -27,15 +27,28 @@
           <dd>{{row["numofchampion"]}}</dd>
         </dl>
        {% endfor %}
-       <hr>
+ 
+    <hr>
+
        <br>
        <h2>Team Boss</h2>
        <br>
         {% for row in rows_boss %}
-        {{row}}
-        
+        <!-- {{row}} -->
+        <dl>
+          <dt>Boss Name:&nbsp&nbsp</dt>
+          <dd>{{row["name"]}}</dd>
+
+          <dt>Boss SSN:&nbsp&nbsp</dt>
+          <dd>{{row["ssn"]}}</dd>
+
+          <dt>Since Year:&nbsp&nbsp</dt>
+          <dd>{{row["since"]|int}}</dd>
+        </dl>
         {% endfor %}
-       <hr>
+
+    <hr>
+    
        <br>
        <h2>Team Manager</h2>
        <br>
@@ -45,7 +58,7 @@
           <dt>Manager Name:&nbsp&nbsp</dt>
           <dd>{{row["mname"]}}</dd>
 
-          <dt>SSN:&nbsp&nbsp</dt>
+          <dt>Manager SSN:&nbsp&nbsp</dt>
           <dd>{{row["ssn"]}}</dd>
 
           <dt>College:&nbsp&nbsp</dt>
@@ -55,7 +68,9 @@
           <dd>{{row["since"]|int}}</dd>
         </dl>
         {% endfor %}
-       <hr>
+
+    <hr>
+    
        <br>
        <h2>Games Played In</h2>
        <br>

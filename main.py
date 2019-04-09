@@ -204,8 +204,8 @@ def search_team(tname):
 
     print ("Select manager successfully")
 
-    cursor_boss = conn.execute('''SELECT * FROM teams inner join
-                                    (SELECT * FROM boss inner join own_by
+    cursor_boss = conn.execute('''SELECT new.name, ssn, since FROM teams inner join
+                                    (SELECT boss.name, boss.ssn, own_by.tid, own_by.since FROM boss inner join own_by
                                     ON boss.ssn = own_by.ssn) new
                                     ON teams.tid = new.tid
                                     WHERE teams.name = '{}';'''.format(tname))
