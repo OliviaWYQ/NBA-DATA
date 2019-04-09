@@ -171,7 +171,24 @@ def search_player():
             cursor_game = conn.execute('''SELECT DISTINCT games.gid, games.date, games.time, host, scoreh, visitor, scorev from teams inner join games on name = games.host OR name = games.visitor WHERE name = '{}';'''.format(tname))
             rows_game = cursor_game.fetchall()
             print ("Select Game successfully")
-            return render_template("psqlsearch_team.html",rows_team=rows_team,rows_game = rows_game)
+            cursor_manager = conn.execute('''SELECT mname, ssn, college, since FROM teams inner join
+                                    (SELECT mname, managers.ssn, college, tid, since FROM managers inner join manage 
+                                    ON managers.ssn = manage.ssn) new
+                                    ON teams.tid = new.tid
+                                    WHERE name = '{}';'''.format(tname))
+            rows_manager = cursor_manager.fetchall()
+
+            print ("Select manager successfully")
+
+            cursor_boss = conn.execute('''SELECT new.name, ssn, since FROM teams inner join
+                                            (SELECT boss.name, boss.ssn, own_by.tid, own_by.since FROM boss inner join own_by
+                                            ON boss.ssn = own_by.ssn) new
+                                            ON teams.tid = new.tid
+                                            WHERE teams.name = '{}';'''.format(tname))
+            rows_boss = cursor_boss.fetchall()
+
+            print ("Select manager successfully")
+            return render_template("psqlsearch_team.html",rows_team=rows_team,rows_game = rows_game,rows_manager=rows_manager, rows_boss=rows_boss)
           else:
             return render_template("error.html", pvalue=pname, tvalue=tname)
         else:
