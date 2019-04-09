@@ -59,7 +59,10 @@ def search_player():
           cursor_team = conn.execute('''SELECT * FROM teams WHERE name = '{}';'''.format(tname))
           rows_team = cursor_team.fetchall()
           print ("Select Team successfully")
-          return render_template("psqlsearch_team.html",rows_team=rows_team)
+          cursor_game = conn.execute('''SELECT DISTINCT games.gid, games.date, games.time, host, scoreh, visitor, scorev from teams inner join games on name = games.host OR name = games.visitor WHERE name = '{}';'''.format(tname))
+          rows_game = cursor_game.fetchall()
+          print ("Select Game successfully")
+          return render_template("psqlsearch_team.html",rows_team=rows_team,rows_game = rows_game)
         else:
           return render_template("error.html", pvalue=pname, tvalue=tname)
 
@@ -75,8 +78,13 @@ def search_team(tname):
     rows_team = cursor_team.fetchall()
 
     print ("Select Team successfully")
-    return render_template("psqlsearch_team.html",rows_team=rows_team)
 
+    cursor_game = conn.execute('''SELECT DISTINCT games.gid, games.date, games.time, host, scoreh, visitor, scorev from teams inner join games on name = games.host OR name = games.visitor WHERE name = '{}';'''.format(tname))
+    rows_game = cursor_game.fetchall()
+
+    print ("Select Game successfully")
+
+    return render_template("psqlsearch_team.html",rows_team = rows_team, rows_game = rows_game)
 
 # @app.route('/result',methods = ['POST', 'GET'])
 # def result():
@@ -151,6 +159,7 @@ def listteam():
     conn = engine.connect()
     cursor_team = conn.execute("select * from teams")
     rows_team = cursor_team.fetchall()
+
     return render_template("listteam.html",rows = rows_team)
 
 @app.route('/listgame')

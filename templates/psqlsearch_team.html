@@ -29,6 +29,34 @@
         </dl>
        {% endfor %}
        <br>
+
+       <h2>Games Played In</h2>
+      <table>
+         <thead>
+          <tr>
+              <th>Game ID</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Host</th>
+              <th>Score of Host</th>
+              <th>Visitor</th>
+              <th>Score of Visitor</th>
+          </tr>
+         </thead>
+
+         {% for row in rows_game %}
+            <tr>
+               <td>{{row["gid"]}}</td>
+               <td>{{row["date"]}}</td>
+               <td>{{row["time"]}}</td>
+               <td>{{row["host"]}}</td>
+               <td>{{row["scoreh"]}}</td>
+               <td>{{row["visitor"]}}</td>
+               <td>{{row["scorev"]}}</td>
+            </tr>
+         {% endfor %}
+      </table>
+
       <a class = "button two" href = "/">return</a>
   	</div>
    </body>

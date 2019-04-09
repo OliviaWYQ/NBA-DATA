@@ -10,9 +10,28 @@
       
    	<div class = "center">
       <br>
-      <h2>Players Data</h2>
+      <h2>Profile</h2>
 
-      <h3>User Info: {{user}}</h3>
+      <h3>User Info</h3>
+      <table>
+         <thead>
+          <tr>
+              <th>User ID</th>
+              <th>Name</th>
+              <th>Email</th>
+          </tr>
+         </thead>
+
+         {% for row in rows %}
+            <tr>
+               <td>{{user["id"]}}</td>
+               <td>{{user["username"]}}</td>
+               <td>{{user["email"]}}</td>
+            </tr>
+         {% endfor %}
+      </table>
+      <br>
+      <h3>Insert Info</h3>
       <table>
          <thead>
           <tr>
