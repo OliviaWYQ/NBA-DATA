@@ -41,7 +41,7 @@ def search_player():
         if pname != '*':
           cursor_player = conn.execute('''SELECT * FROM viewplayer WHERE pid = '{}';'''.format(pname))
           rows_player = cursor_player.fetchall()
-        
+          print(rows_player)
         # cursor_team = conn.execute('''SELECT * FROM teams WHERE name = '{}';'''.format(tname))
         # rows_team = cursor_team.fetchall()
 
@@ -53,16 +53,22 @@ def search_player():
         # rows = players.select(players.c.pid == pname).execute()
 
         # cur.execute("SELECT * from players")
-          print ("Select Player successfully")
-          return render_template("psqlsearch_player.html",rows_player=rows_player)
+          if rows_player != []:
+            print ("Select Player successfully")
+            return render_template("psqlsearch_player.html",rows_player=rows_player)
+          else:
+            return render_template("error.html", pvalue=pname, tvalue=tname)
         elif tname != '*':
           cursor_team = conn.execute('''SELECT * FROM teams WHERE name = '{}';'''.format(tname))
           rows_team = cursor_team.fetchall()
-          print ("Select Team successfully")
-          cursor_game = conn.execute('''SELECT DISTINCT games.gid, games.date, games.time, host, scoreh, visitor, scorev from teams inner join games on name = games.host OR name = games.visitor WHERE name = '{}';'''.format(tname))
-          rows_game = cursor_game.fetchall()
-          print ("Select Game successfully")
-          return render_template("psqlsearch_team.html",rows_team=rows_team,rows_game = rows_game)
+          if rows_team != []:
+            print ("Select Team successfully")
+            cursor_game = conn.execute('''SELECT DISTINCT games.gid, games.date, games.time, host, scoreh, visitor, scorev from teams inner join games on name = games.host OR name = games.visitor WHERE name = '{}';'''.format(tname))
+            rows_game = cursor_game.fetchall()
+            print ("Select Game successfully")
+            return render_template("psqlsearch_team.html",rows_team=rows_team,rows_game = rows_game)
+          else:
+            return render_template("error.html", pvalue=pname, tvalue=tname)
         else:
           return render_template("error.html", pvalue=pname, tvalue=tname)
 
