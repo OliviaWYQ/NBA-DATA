@@ -3,8 +3,9 @@ clone the repository and run
 ```
 python main.py
 ```
-Go to http://0.0.0.0:8111/
-User needs to signup/login first, and then search the players or teams data
+Go to http://0.0.0.0:8111/ for the local server.
+
+User needs to signup/login first, and then search the players or teams data.
 
 
 * The PostgreSQL account where your database on our server resides: 
