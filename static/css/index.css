@@ -16,11 +16,10 @@
 	overflow: hidden;
 }
 
-.div1{
+/*.div1{
 	position: relative;
 	height: 100px;
 	width: 100%;
-	/*background: aqua;*/
 	z-index: 200;
 }
 .div1 ul,li{
@@ -34,7 +33,6 @@
 .div1 li{
 	height:80px;
 	width: 80px;
-	/*background: salmon;*/
 	margin-right: 20px;
 	margin-left: 20px;
 	display: inline-block;
@@ -44,17 +42,17 @@
 	text-align: center;
 	vertical-align: center;
 	line-height: 100px;
-}
+}*/
 
-.nav{
+.div1{
 	height: 80px;
 	float: right;
 }
-.nav ul{
+.div1 ul{
 	margin-right: 60px;
 }
-.nav li{
-	float: right;
+.div1 li{
+	float: left;
 	list-style-type: none;
 	width: 120px;
 	font-family: Helvetica;
@@ -340,6 +338,7 @@ tbody tr:nth-child(odd) {
 		white-space: nowrap;
 	}
 	.div1 li{
+		float: none;
 		height:80px;
 		width: 100px;
 		/*background: salmon;*/
