@@ -11,7 +11,7 @@ NBA DATA
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" /> 
 <link rel="shortcut icon" href="{{ url_for('static', filename='image/favicon.ico')}}" />
 <link rel="stylesheet" href="{{url_for('.static', filename='css/starter-template.css')}}">
-<!-- <link rel= "stylesheet" href= "{{ url_for('static',filename='css/index.css')}}"> -->
+<link rel= "stylesheet" href= "{{ url_for('static',filename='css/image.css')}}">
 {% endblock %}
 
 {% block content %}
@@ -42,7 +42,7 @@ NBA DATA
       <br>
       
       <div class="starter-template">
-        <img margin-left="auto" margin-right="auto" height="350" width="700" src="{{url_for('.static', filename='image/NBA_Header.jpg')}}">
+        <img class = "setting" src="{{url_for('.static', filename='image/NBA_Header.png')}}">
 
         <h1>Welcome to the wonderland!</h1>
         <p class="lead">Use this website to search for the information of all NBA players you like.<br> All you need to do is Login!</p>
