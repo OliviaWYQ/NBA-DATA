@@ -10,24 +10,55 @@
 .header .logo img{
 	width:200px;
 	height: 100px;
-	margin-left: 120px;
+	margin-left: 80px;
+	margin-right: 80px;
 	float: left;
 	overflow: hidden;
 }
 
-.nav{
+.div1{
+	position: relative;
 	height: 100px;
+	width: 100%;
+	/*background: aqua;*/
+	z-index: 200;
+}
+.div1 ul,li{
+	list-style: none;
+}
+.div1 ul{
+	overflow: hidden;
+	overflow-x: auto;
+	white-space: nowrap;
+}
+.div1 li{
+	height:80px;
+	width: 80px;
+	/*background: salmon;*/
+	margin-right: 20px;
+	margin-left: 20px;
+	display: inline-block;
+	font-weight: bold;
+	font-family: Helvetica;
+	font-size: 18px;
+	text-align: center;
+	vertical-align: center;
+	line-height: 100px;
+}
+
+.nav{
+	height: 80px;
 	float: right;
 }
 .nav ul{
-	margin-right: 120px;
+	margin-right: 60px;
 }
 .nav li{
 	float: right;
 	list-style-type: none;
-	width: 100px;
-	font-family: "Georgia";
-	font-size: 15px;
+	width: 120px;
+	font-family: Helvetica;
+	font-size: 18px;
 	line-height: 100px;
 	font-weight: bold;
 	text-align: center;
@@ -72,6 +103,13 @@ a.two:active {
       text-align:center;
 }
 
+/*input#menu {
+	    display: none;
+	}
+
+label {
+	display: none;
+}*/
 /*dt {
     font-weight: bold;
 }
@@ -216,7 +254,7 @@ tbody tr:nth-child(odd) {
 	font-size: 15px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
 	/*.nav {
 		position: absolute;
 		float: left
@@ -243,11 +281,19 @@ tbody tr:nth-child(odd) {
 		margin: 0px auto;
 		float: none;
 		display: table;
+		z-index: 0;
 	}
 
-	.nav{
+	.main .pic img{
+		width: 100%;
+		height: 600px;
 		position: static;
-		height: 100px;
+	}
+
+	/*.nav{
+		z-index: 2;
+		position: absolute;
+		height: 80px;
 		float: none;
 		margin: 0px auto;
 	}
@@ -255,19 +301,129 @@ tbody tr:nth-child(odd) {
 	.nav ul{
 		list-style-type: none;
 	}
+
 	.nav li{
-		font-family: "Georgia";
+		font-family: Helvetica;
 		font-size: 15px;
 		line-height: 100px;
 		font-weight: bold;
 		text-align: center;
+		color: #006bb7;
+
 	}
 	.nav li a{
-		display:block;
+		display:inline;
+
+	}*/
+/*
+	.collapsible-menu {
+		position: absolute;
+		z-index: 10;
+		text-align: center;
+	    background-color: white;
+	    padding: 0px 10px;
+	}*/
+
+	.div1{
+		position: relative;
+		height: 100px;
+		width: 100%;
+		/*background: aqua;*/
+		z-index: 200;
+	}
+	.div1 ul,li{
+		list-style: none;
+	}
+	.div1 ul{
+		overflow: hidden;
+		overflow-x: auto;
+		white-space: nowrap;
+	}
+	.div1 li{
+		height:80px;
+		width: 100px;
+		/*background: salmon;*/
+		margin-right: 30px;
+		margin-left: 30px;
+		display: inline-block;
+		font-weight: bold;
+		font-family: Helvetica;
+		font-size: 18px;
+		text-align: center;
+		vertical-align: center;
+		line-height: 100px;
+	}
+
+	.nav{
+		list-style-type: none;
+	}
+/*
+	.collapsible-menu ul {
+	    list-style-type: none;
+	    padding: 0;
+		z-index: 100;
+		width: 100%;
+	    overflow-x: scroll;
+	    overflow-y: hidden;
+	    white-space: nowrap;
+	}
+	
+	.collapsible-menu a {
+	    padding: 10px;
+	    text-decoration: none;
+	    margin-left: 20px;
+		float:none;
+		display:inline-block;
+	    box-sizing: border-box;
+	    width:33%;
+	}*/
+
+	/*.collapsible-menu label {
+	    font-family: Helvetica, cursive;
+	    font-weight: bold;
+	    color: #0d0d0d;
+	    font-size: 25px;
+	    display: block;
+	    cursor: pointer;
+	    padding: 30px 20px 10px 10px;
+	}
+
+	.menu-content {
+	    max-height: 0;
+	    overflow: hidden;
+	    font-family: 'Oswald', sans-serif; 
+	    padding: 0 0 0 50px;
+	}
+
+	input:checked ~ .menu-content {
+	    max-height: 100%;
 	}
 
 
+	input #menu {
+	    display: block;
+	}
 
+	label {
+		display: block;
+	}
+*/
+	/*a.one:link {
+		color:#ffffff;
+		text-decoration:none;
+		}    
+	a.one:visited {
+		color:#ffffff;
+		text-decoration:none;
+		} 
+	a.one:hover {
+		color:#006bb7;
+		text-decoration:none;
+		} 
+	a.one:active {
+		color:#006bb7;
+		text-decoration:none;
+		} */
 
 
 

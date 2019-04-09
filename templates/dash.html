@@ -6,7 +6,8 @@ Dashboard
 
 {% block styles %}
 {{super()}}
-<link rel="stylesheet" href="{{url_for('.static', filename='dashboard.css')}}">
+<link rel="stylesheet" href="{{url_for('.static', filename='css/dashboard.css')}}">
+<link rel="shortcut icon" href="{{ url_for('static', filename='image/favicon.ico')}}" />
 {% endblock %}
 
 {% block content %}
