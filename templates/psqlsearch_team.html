@@ -12,7 +12,6 @@
       <br>
       <h2>PostgreSQL Search For Team</h2>
       <br>
-       
        {% for row in rows_team %}
         <dl>
           <dt>Team Name:&nbsp&nbsp</dt>
@@ -28,9 +27,38 @@
           <dd>{{row["numofchampion"]}}</dd>
         </dl>
        {% endfor %}
+       <hr>
        <br>
+       <h2>Team Boss</h2>
+       <br>
+        {% for row in rows_boss %}
+        {{row}}
+        
+        {% endfor %}
+       <hr>
+       <br>
+       <h2>Team Manager</h2>
+       <br>
+        {% for row in rows_manager %}
+        <!-- {{row}} -->
+        <dl>
+          <dt>Manager Name:&nbsp&nbsp</dt>
+          <dd>{{row["mname"]}}</dd>
 
+          <dt>SSN:&nbsp&nbsp</dt>
+          <dd>{{row["ssn"]}}</dd>
+
+          <dt>College:&nbsp&nbsp</dt>
+          <dd>{{row["college"]}}</dd>
+
+          <dt>Since Year:&nbsp&nbsp</dt>
+          <dd>{{row["since"]|int}}</dd>
+        </dl>
+        {% endfor %}
+       <hr>
+       <br>
        <h2>Games Played In</h2>
+       <br>
       <table>
          <thead>
           <tr>
@@ -46,7 +74,7 @@
 
          {% for row in rows_game %}
             <tr>
-               <td>{{row["gid"]}}</td>
+               <td>{{row["gid"]|int}}</td>
                <td>{{row["date"]}}</td>
                <td>{{row["time"]}}</td>
                <td>{{row["host"]}}</td>

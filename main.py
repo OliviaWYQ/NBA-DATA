@@ -92,19 +92,19 @@ def login():
     if form.validate_on_submit():
         username = request.form['username']
         password = request.form['password'].strip()
-        print (password)
+        # print (password)
         user = g.conn.execute(
             '''SELECT * FROM usernba WHERE username = '{}';'''.format(username)
         )
         if user:
             for u in user:
                 u = str(u.password).strip()
-                print("-----------user-------{}".format(u))
-                print(str(password))
+                print("------user------password------{}".format(u))
+                # print(str(password))
                 # if check_password_hash(u[3], form.password.data):
 
                 if u == password:
-                    print ("-----------user1-------{}\n")
+                    print ("---------success--------")
                     session['logged_in'] = True
                     #session['user_id'] = user[0]
                     #login_user(user, remember=form.remember.data)
@@ -127,7 +127,7 @@ def index():
 ######################################################################################################################
 ######################################################################################################################
 
-@app.route('/result',methods = ['POST', 'GET'])
+@app.route('/result',methods = ['POST'])
 def search_player():
     if request.method == 'POST':
         pname = request.form['pname']
@@ -195,7 +195,25 @@ def search_team(tname):
 
     print ("Select Game successfully")
 
-    return render_template("psqlsearch_team.html",rows_team = rows_team, rows_game = rows_game)
+    cursor_manager = conn.execute('''SELECT mname, ssn, college, since FROM teams inner join
+                                    (SELECT mname, managers.ssn, college, tid, since FROM managers inner join manage 
+                                    ON managers.ssn = manage.ssn) new
+                                    ON teams.tid = new.tid
+                                    WHERE name = '{}';'''.format(tname))
+    rows_manager = cursor_manager.fetchall()
+
+    print ("Select manager successfully")
+
+    cursor_boss = conn.execute('''SELECT * FROM teams inner join
+                                    (SELECT * FROM boss inner join own_by
+                                    ON boss.ssn = own_by.ssn) new
+                                    ON teams.tid = new.tid
+                                    WHERE teams.name = '{}';'''.format(tname))
+    rows_boss = cursor_boss.fetchall()
+
+    print ("Select manager successfully")
+
+    return render_template("psqlsearch_team.html",rows_team = rows_team, rows_game = rows_game, rows_manager=rows_manager, rows_boss=rows_boss)
 
 # @app.route('/result',methods = ['POST', 'GET'])
 # def result():
@@ -214,10 +232,12 @@ def addrec():
           nm = request.form['addname']
           tm = request.form['addteam']
 
-          with sql.connect("database.db") as con:
-             cur = con.cursor()
-             cur.execute("INSERT INTO players (name, team) VALUES (?,?)",(nm,tm) )
+          engine = create_engine(DATABASEURI)
+          # with sql.connect("database.db") as con:
+          with engine.connect() as con:
+             # cur = con.cursor()
 
+             cun.execute("INSERT INTO players (name, team) VALUES (?,?)",(nm,tm) )
              con.commit()
              msg = "Request successfully added, waiting for administrator to approve."
        except:
@@ -225,22 +245,30 @@ def addrec():
           msg = "error in insert operation"
 
        finally:
-          return render_template("result.html",msg = msg)
+          return render_template("result.html", msg = msg)
           con.close()
 
 
 @app.route('/profile')
 def profile():
-    con = sql.connect("database.db")
-    con.row_factory = sql.Row
-    cur = con.cursor()
-    cur.execute("select * from players")
-    rows = cur.fetchall()
+    # con = sql.connect("database.db")
+    # con.row_factory = sql.Row
+    # cur = con.cursor()
+    # cur.execute("select * from players")
+    # rows = cur.fetchall()
+    # cur_user = con.cursor()
+    # cur_user.execute("select * from user")
+    # user = cur_user.fetchall()
 
-    cur_user = con.cursor()
-    cur_user.execute("select * from user")
-    user = cur_user.fetchall()
-    return render_template("profile.html",user = user, rows = rows)
+    engine = create_engine(DATABASEURI)
+    con = engine.connect()
+    cusor_insert = con.execute("select * from insert")
+    rows_insert = cusor_insert.fetchall()
+
+    cusor_user = con.execute("select * from usernba")
+    rows_user = cusor_user.fetchall()
+
+    return render_template("profile.html",rows_user = rows_user, rows_insert = rows_insert)
 
 
 @app.route('/listplayer')
@@ -253,6 +281,7 @@ def listplayer():
 
     engine = create_engine(DATABASEURI)
     conn = engine.connect()
+
     cursor_player = conn.execute("select * from players inner join employees on players.ssn = employees.ssn")
     rows_player = cursor_player.fetchall()
     return render_template("listplayer.html",rows = rows_player)
@@ -277,14 +306,17 @@ def listgame():
 
 @app.route('/init')
 def init():
-    conn = sqlite3.connect('database.db')
+    # conn = sqlite3.connect('database.db')
+    engine = create_engine(DATABASEURI)
+    conn = engine.connect()
+
     print ("Opened database successfully")
 
-    conn.execute('CREATE TABLE players (name TEXT, team TEXT)')
-    print ("Player Table created successfully")
+    conn.execute('CREATE TABLE insert (name TEXT, team TEXT)')
+    print ("Insert Player Table created successfully")
 
-    conn.execute('CREATE TABLE user (id INT, username CHAR(15), email CHAR(50), password CHAR(80), PRIMARY KEY (id))')
-    print ("User Table created successfully")
+    # conn.execute('CREATE TABLE user (id INT, username CHAR(15), email CHAR(50), password CHAR(80), PRIMARY KEY (id))')
+    # print ("User Table created successfully")
 
     conn.close()
     return 'OK'
@@ -333,6 +365,6 @@ if __name__ == '__main__':
     def run(debug, threaded, host, port):
         HOST, PORT = host, port
         print ("running on %s:%d" % (HOST, PORT))
-        app.run(host=HOST, port=PORT, debug=debug, threaded=threaded)
-    #run()
-    app.run(debug = True)
+        app.run(host=HOST, port=PORT, debug=True, threaded=threaded)
+    run()
+    # app.run(debug = True)

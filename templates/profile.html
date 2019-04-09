@@ -2,7 +2,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" /> 
-	<title>My profile</title>
+	<title>User Profile</title>
   <link rel="shortcut icon" href="{{ url_for('static', filename='image/favicon.ico')}}" />
 	<link rel= "stylesheet" href= "{{ url_for('static',filename='css/index.css')}}">
 </head>
@@ -10,9 +10,9 @@
       
    	<div class = "center">
       <br>
-      <h2>Profile</h2>
-
-      <h3>User Info</h3>
+      <h2>User Profile</h2>
+      <br>
+      <h3>Users Data</h3>
       <table>
          <thead>
           <tr>
@@ -22,16 +22,17 @@
           </tr>
          </thead>
 
-         {% for row in rows %}
+         {% for row in rows_user %}
+
             <tr>
-               <td>{{user["id"]}}</td>
-               <td>{{user["username"]}}</td>
-               <td>{{user["email"]}}</td>
+               <td>{{row["id"]}}</td>
+               <td>{{row["username"]}}</td>
+               <td>{{row["email"]}}</td>
             </tr>
          {% endfor %}
       </table>
       <br>
-      <h3>Insert Info</h3>
+      <h3>Insert Query</h3>
       <table>
          <thead>
           <tr>
@@ -40,7 +41,7 @@
           </tr>
          </thead>
 
-         {% for row in rows %}
+         {% for row in rows_insert %}
             <tr>
                <td>{{row["pid"]}}</td>
                <td>{{row["team"]}}</td>
