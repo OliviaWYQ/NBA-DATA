@@ -1,4 +1,10 @@
 # NBA-DATA
+
+## Video Demo
+
+[Youtube](https://www.youtube.com/watch?v=WmldKMFOOds)
+
+## Detailed Discription
 clone the repository and run 
 ```
 python main.py
