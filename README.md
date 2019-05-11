@@ -1,8 +1,8 @@
 # NBA-DATA
 
-## Video Demo
+## Demo
 
-[Youtube](https://www.youtube.com/watch?v=WmldKMFOOds)
+[Video Demo on Youtube](https://www.youtube.com/watch?v=WmldKMFOOds)
 
 ## Detailed Discription
 clone the repository and run 
