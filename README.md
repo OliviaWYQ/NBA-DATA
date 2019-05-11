@@ -34,7 +34,7 @@ User needs to signup/login first, and then search the players or teams data.
 
 # Contributors
 
-Yiqian Wang - Website Search/Data pages/Database
+Yiqian Wang - Website (Search/Data pages)/Database
 
-Yuanyuan Yao - Website Login/Signup pages/Database
+Yuanyuan Yao - Website (Login/Signup pages)/Database
 
