@@ -32,3 +32,9 @@ User needs to signup/login first, and then search the players or teams data.
     The signup page require some interesting database operations. As we use select to check if the username or email had already exist in the database. If duplicate, we have an informing message indicating that the username/email was used by other people; if not, we insert that information to our user table and jump to the login page. Moreover, both signup and login page have some validator. Your username must  be between 3 and 15 characters long, or our page would give an error message.
     The search page is also interesting. Once you type the existing player in our database, you can go to the webpage that shows all the information of that player. In that player page, you can see a link that can lead you to the player’s team.
 
+# Contributors
+
+Yiqian Wang - Website Search/Data pages/Database
+
+Yuanyuan Yao - Website Login/Signup pages/Database
+
